@@ -16,11 +16,18 @@ or
 yarn add @appsmith/js-utility-library
 ```
 
+<p align="center">
+<a href="https://www.appsmith.com?utm_source=github&utm_medium=organic&utm_campaign=readme">
+  <img src="static/appsmith_logo_white.png" alt="Appsmith Logo" width="350">
+</a>
+</p>
+
 ## Usage
 
 Here are the functions available in this module and how to use them:
 
-`getUniqueValues(data, field)`
+## `getUniqueValues(data, field)`
+
 Get unique values from an array of objects based on a specified field.
 
 ```javascript
@@ -46,7 +53,8 @@ let uniqueTypes = utils.getUniqueValues(array, 'type');
 console.log(uniqueTypes); // Output: ['animal', 'object', ...]
 ```
 
-`createData(array, newObject)`
+## `createData(array, newObject)`
+
 Create new data by adding an object to an existing array.
 
 ```javascript
@@ -63,7 +71,8 @@ users = utils.createData(users, newUser);
 console.log(users); // The users array now includes Charlie.
 ```
 
-`updateData(array, id, data)`
+## `updateData(array, id, data)`
+
 Update an object in an array based on its ID.
 
 ```javascript
@@ -80,7 +89,8 @@ users = utils.updateData(users, '2', updatedUser);
 console.log(users); // The 'Bob' user is updated with the new data.
 ```
 
-`deleteData(array, id)`
+## `deleteData(array, id)`
+
 Delete an object from an array based on its ID.
 
 ```javascript
@@ -96,7 +106,8 @@ users = utils.deleteData(users, '2'); // Deletes the 'Bob' user
 console.log(users); // The 'Bob' user is removed from the array.
 ```
 
-`generateId(type, length = 10)`
+## `generateId(type, length = 10)`
+
 Generate a unique ID of the specified type ('random' or 'uuid').
 
 ```javascript
