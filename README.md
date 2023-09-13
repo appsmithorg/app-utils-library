@@ -13,13 +13,13 @@ This is a collection of utility functions for common tasks in JavaScript. This m
 You can install Appsmith Utility Library using npm or yarn:
 
 ```bash
-npm install @appsmith/js-utility-library
+npm install git@github.com:appsmithorg/js-utility-library.git
 ```
 
 or
 
 ```bash
-yarn add @appsmith/js-utility-library
+yarn add git@github.com:appsmithorg/js-utility-library.git
 ```
 
 ## Usage

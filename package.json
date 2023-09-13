@@ -1,5 +1,5 @@
 {
-  "name": "appsmith-utility-functions",
+  "name": "@appsmith/js-utility-library",
   "version": "1.0.0",
   "description": "A collection of utility functions for the Appsmith platform",
   "main": "index.js",
@@ -12,9 +12,7 @@
   },
   "author": "Jacques Ikot",
   "license": "MIT",
-  "dependencies": {
-    "crypto": "^1.0.1"
-  },
+  "dependencies": {},
   "keywords": [
     "utilities",
     "functions"
