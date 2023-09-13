@@ -137,27 +137,27 @@ The `filterQueryFactoryPostgres` function is a utility function for generating S
 Here's an example of how to use the `filterQueryFactoryPostgres` function to generate SQL query conditions:
 
 ```javascript
+const utils = require('@appsmith/js-utility-library');
+
 const filters = [
   {
-    column: 'age',
-    condition: 'greaterThan',
-    value: 25,
+    id: 't52x5q7nwc',
+    operator: 'or',
+    column: 'id',
+    condition: 'greaterthan',
+    value: 2,
   },
   {
-    column: 'name',
-    condition: 'startsWith',
-    value: 'John',
-  },
-  {
-    column: 'city',
-    condition: 'isEqualTo',
-    value: 'New York',
-    operator: 'OR', // Use 'OR' to combine with the previous filter using OR logic.
+    id: '9ke2d1hjqo',
+    operator: 'and',
+    column: 'logo_url',
+    condition: 'notempty',
+    value: '',
   },
 ];
 
-const sqlConditions = filterQueryFactoryPostgres(filters);
+const sqlConditions = utils.filterQueryFactoryPostgres(filters);
 
 console.log(sqlConditions);
-// Output: "WHERE age > 25 AND name LIKE 'John%' OR city = 'New York'"
+// Output: "WHERE id > 2 AND logo_url IS NOT NULL"
 ```
