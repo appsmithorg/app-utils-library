@@ -108,3 +108,45 @@ console.log(randomId); // Output: A random 8-character string
 let uuid = utils.generateId('uuid');
 console.log(uuid); // Output: A UUID (Universally Unique Identifier)
 ```
+
+## `filterQueryFactoryPostgres(filters)`
+
+The `filterQueryFactoryPostgres` function is a utility function for generating SQL query conditions based on an array of filters. It is particularly useful when working with PostgreSQL databases.
+
+### Parameters
+
+- `filters` (Array of Objects): An array of filter objects, where each object defines a filtering condition. Each filter object should have the following properties:
+  - `column` (String): The name of the database column you want to filter on.
+  - `condition` (String): The filtering condition to apply (e.g., 'isEqualTo', 'lessThan', 'contains', etc.).
+  - `value` (String or Number): The value to compare against in the filtering condition.
+  - `operator` (String, optional): The logical operator ('AND' or 'OR') to use when combining multiple filters. The default is 'WHERE' for the first filter and 'AND' for subsequent ones.
+
+### Example
+
+Here's an example of how to use the `filterQueryFactoryPostgres` function to generate SQL query conditions:
+
+```javascript
+const filters = [
+  {
+    column: 'age',
+    condition: 'greaterThan',
+    value: 25,
+  },
+  {
+    column: 'name',
+    condition: 'startsWith',
+    value: 'John',
+  },
+  {
+    column: 'city',
+    condition: 'isEqualTo',
+    value: 'New York',
+    operator: 'OR', // Use 'OR' to combine with the previous filter using OR logic.
+  },
+];
+
+const sqlConditions = filterQueryFactoryPostgres(filters);
+
+console.log(sqlConditions);
+// Output: "WHERE age > 25 AND name LIKE 'John%' OR city = 'New York'"
+```
