@@ -1,3 +1,9 @@
+<p align="center">
+<a href="https://www.appsmith.com?utm_source=github&utm_medium=organic&utm_campaign=readme">
+  <img src="static/appsmith_logo_white.png" alt="Appsmith Logo" width="350">
+</a>
+</p>
+
 # Appsmith Utility Library Module
 
 This is a collection of utility functions for common tasks in JavaScript. This module includes functions to work with arrays, objects, and generate unique IDs. It's designed to be simple to use and can be easily integrated into your Node.js, browser-based projects or Appsmith apps.
@@ -15,12 +21,6 @@ or
 ```bash
 yarn add @appsmith/js-utility-library
 ```
-
-<p align="center">
-<a href="https://www.appsmith.com?utm_source=github&utm_medium=organic&utm_campaign=readme">
-  <img src="static/appsmith_logo_white.png" alt="Appsmith Logo" width="350">
-</a>
-</p>
 
 ## Usage
 
