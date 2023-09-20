@@ -103,10 +103,26 @@ function generateId(type, length = 10) {
   return id.toString();
 }
 
+/**
+ * Generate PostgreSQL WHERE clause conditions based on a list of filters.
+ *
+ * @param {Array} filters - An array of filter objects with column, condition, and value properties.
+ * @returns {string} - A string representing the WHERE clause conditions for PostgreSQL queries.
+ */
 function filterQueryFactoryPostgres(filters) {
+  /**
+   * Factory function to create individual filter conditions.
+   *
+   * @param {Object} filter - A filter object with column, condition, and value properties.
+   * @param {number} index - The index of the filter in the filters array.
+   * @returns {string} - A string representing an individual filter condition.
+   */
   function factory(filter, index) {
+    // Set the operator (e.g., WHERE) for the first filter, otherwise use the specified operator.
     filter.operator = index ? filter.operator : 'WHERE';
     const { column, condition, value, operator } = filter;
+
+    // Define conditions for non-date columns
     const conditions = {
       empty: `${operator} ${column} IS NULL`,
       lessThan: `${operator} ${column} < ${value}`,
@@ -122,9 +138,111 @@ function filterQueryFactoryPostgres(filters) {
       greaterThanEqualTo: `${operator} ${column} >= ${value}`,
       doesNotContain: `${operator} ${column} NOT LIKE '%${value}%'`,
     };
-    return conditions[condition];
+
+    // Define conditions for date columns
+    const dateConditions = {
+      is: `${operator} ${column} = '${value}'`,
+      isAfter: `${operator} ${column} > '${value}'`,
+      isBefore: `${operator} ${column} < '${value}'`,
+      isNot: `${operator} ${column} != '${value}'`,
+      empty: `${operator} ${column} IS NULL`,
+      notEmpty: `${operator} ${column} IS NOT NULL`,
+    };
+
+    // Check if the condition is a date condition, and use the appropriate conditions object
+    const selectedConditions = dateConditions[condition] || conditions[condition];
+
+    return selectedConditions;
   }
+
+  // Join the individual filter conditions with the specified operator (e.g., AND)
   return filters.map(factory).join(' ');
+}
+
+/**
+ * Generate MongoDB query conditions based on a list of filters.
+ *
+ * @param {Array} filters - An array of filter objects with column, condition, and value properties.
+ * @returns {Object} - A MongoDB query object representing the filter conditions.
+ */
+function filterQueryFactoryMongo(filters) {
+  const mongoFilters = [];
+
+  for (const filter of filters) {
+    if (filter && filter.column && filter.condition && filter.value !== undefined) {
+      const { column, condition, value } = filter;
+      const filterObject = {};
+
+      // Map filter conditions to MongoDB operators
+      switch (condition) {
+        case 'empty':
+          filterObject[column] = { $eq: null };
+          break;
+        case 'lessThan':
+          filterObject[column] = { $lt: value };
+          break;
+        case 'notEmpty':
+          filterObject[column] = { $ne: null };
+          break;
+        case 'isEqualTo':
+          filterObject[column] = value;
+          break;
+        case 'notEqualTo':
+          filterObject[column] = { $ne: value };
+          break;
+        case 'greaterThan':
+          filterObject[column] = { $gt: value };
+          break;
+        case 'isExactly':
+          filterObject[column] = value;
+          break;
+        case 'endsWith':
+          filterObject[column] = { $regex: `.*${value}$` };
+          break;
+        case 'contains':
+          filterObject[column] = { $regex: `.*${value}.*` };
+          break;
+        case 'startsWith':
+          filterObject[column] = { $regex: `^${value}.*` };
+          break;
+        case 'lessThanEqualTo':
+          filterObject[column] = { $lte: value };
+          break;
+        case 'greaterThanEqualTo':
+          filterObject[column] = { $gte: value };
+          break;
+        case 'doesNotContain':
+          filterObject[column] = { $not: { $regex: `.*${value}.*` } };
+          break;
+        // Handle date conditions
+        case 'isAfter':
+          filterObject[column] = { $gt: new Date(value) };
+          break;
+        case 'isBefore':
+          filterObject[column] = { $lt: new Date(value) };
+          break;
+        case 'isOn':
+          const startDate = new Date(value);
+          const endDate = new Date(value);
+          endDate.setDate(endDate.getDate() + 1); // Create a range for the whole day
+          filterObject[column] = { $gte: startDate, $lt: endDate };
+          break;
+        default:
+          console.error(`Unsupported condition: ${condition}`);
+      }
+
+      mongoFilters.push(filterObject);
+    } else {
+      // Handle invalid filter objects or missing properties
+      console.error('Invalid filter object:', filter);
+    }
+  }
+
+  if (mongoFilters.length > 0) {
+    return { $and: mongoFilters };
+  } else {
+    return {}; // No valid conditions, return an empty filter
+  }
 }
 
 // Export the function so it can be used in other modules
@@ -135,4 +253,5 @@ module.exports = {
   deleteData,
   generateId,
   filterQueryFactoryPostgres,
+  filterQueryFactoryMongo,
 };

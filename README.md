@@ -161,3 +161,58 @@ const sqlConditions = utils.filterQueryFactoryPostgres(filters);
 console.log(sqlConditions);
 // Output: "WHERE id > 2 AND logo_url IS NOT NULL"
 ```
+
+## `filterQueryFactoryMongo(filters)`
+
+The `filterQueryFactoryMongo` function is a utility function for generating MongoDB query conditions based on an array of filters. It is particularly useful when working with MongoDB databases.
+
+### Parameters
+
+- `filters` (Array of Objects): An array of filter objects, where each object defines a filtering condition. Each filter object should have the following properties:
+  - `column` (String): The name of the MongoDB field you want to filter on.
+  - `condition` (String): The filtering condition to apply (e.g., 'isEqualTo', 'lessThan', 'contains', etc.).
+  - `value` (String or Number): The value to compare against in the filtering condition.
+  - `operator` (String, optional): The logical operator ('AND' or 'OR') to use when combining multiple filters. The default is 'WHERE' for the first filter and 'AND' for subsequent ones.
+
+### Example
+
+Here's an example of how to use the `filterQueryFactoryMongo` function to generate MongoDB query conditions:
+
+```javascript
+const utils = require('@appsmith/js-utility-library');
+
+const filters = [
+  {
+    id: 'yq04iff2ao',
+    operator: 'OR',
+    column: 'rating',
+    condition: 'greaterThan',
+    value: 2,
+  },
+  {
+    id: '1fn49sn0w5',
+    operator: 'AND',
+    column: 'total_cost',
+    condition: 'greaterThan',
+    value: 10000,
+  },
+];
+
+const mongoQuery = utils.queryFactoryMongo(filters);
+
+console.log(mongoQuery);
+// Output: {
+//  "$and": [
+//    {
+//      "rating": {
+//        "$gt": 2
+//      }
+//    },
+//    {
+//      "total_cost": {
+//        "$gt": 10000
+//      }
+//    }
+//  ]
+// }
+```
