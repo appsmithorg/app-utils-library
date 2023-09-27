@@ -2,9 +2,10 @@
   "name": "@appsmith/js-utility-library",
   "version": "1.0.0",
   "description": "A collection of utility functions for the Appsmith platform",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"No tests available\""
+    "test": "echo \"No tests available\"",
+    "build": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -17,5 +18,10 @@
     "utilities",
     "functions"
   ],
-  "homepage": "https://github.com/appsmithorg/app-utils-library#readme"
+  "homepage": "https://github.com/appsmithorg/app-utils-library#readme",
+  "devDependencies": {
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  }
 }
