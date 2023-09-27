@@ -19,58 +19,6 @@ function getUniqueValues(data, field) {
 }
 
 /**
- * Create new data by adding an object to an existing array.
- *
- * @param {Array} array - The existing array of objects.
- * @param {Object} newObject - The object to add to the array.
- * @returns {Array} A new array containing the existing data plus the new object.
- */
-function createData(array, newObject) {
-  // Check if 'array' is an array and 'newObject' is an object
-  if (!Array.isArray(array) || typeof newObject !== 'object') {
-    return [];
-  }
-
-  // Return a new array containing the existing data and the new object
-  return [...array, newObject];
-}
-
-/**
- * Update an object in an array based on its ID.
- *
- * @param {Array} array - The array of objects to update.
- * @param {string} id - The ID of the object to update.
- * @param {Object} data - The new data to update the object with.
- * @returns {Array} A new array with the updated object, or the original array if the ID is not found.
- */
-function updateData(array, id, data) {
-  // Check if 'array' is an array and 'data' is an object
-  if (!Array.isArray(array) || typeof data !== 'object') {
-    return [];
-  }
-
-  // Use 'map' to update the object with the matching ID
-  return array.map((item) => (item.id === id ? { ...item, ...data } : item));
-}
-
-/**
- * Delete an object from an array based on its ID.
- *
- * @param {Array} array - The array of objects to delete from.
- * @param {string} id - The ID of the object to delete.
- * @returns {Array} A new array with the specified object removed, or the original array if the ID is not found.
- */
-function deleteData(array, id) {
-  // Check if 'array' is an array
-  if (!Array.isArray(array)) {
-    return [];
-  }
-
-  // Use 'filter' to remove the object with the matching ID
-  return array.filter((item) => item.id !== id);
-}
-
-/**
  * Generate a unique ID of the specified type.
  *
  * @param {string} type - The type of ID to generate ('random' or 'uuid').
@@ -248,9 +196,6 @@ function filterQueryFactoryMongo(filters) {
 // Export the function so it can be used in other modules
 module.exports = {
   getUniqueValues,
-  createData,
-  updateData,
-  deleteData,
   generateId,
   filterQueryFactoryPostgres,
   filterQueryFactoryMongo,

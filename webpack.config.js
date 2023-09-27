@@ -6,7 +6,7 @@ module.exports = {
   output: {
     filename: 'index.min.js', // Output file name
     path: path.resolve(__dirname, 'dist'), // Output directory
-    library: 'js-utility-library', // UMD export variable name
+    library: 'jsUtilityLibrary', // UMD export variable name
     libraryTarget: 'umd', // UMD format
   },
   optimization: {

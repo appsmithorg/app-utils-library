@@ -47,59 +47,6 @@ let uniqueTypes = utils.getUniqueValues(array, 'type');
 console.log(uniqueTypes); // Output: ['animal', 'object', ...]
 ```
 
-## `createData(array, newObject)`
-
-Create new data by adding an object to an existing array.
-
-```javascript
-const utils = require('@appsmith/js-utility-library');
-
-let users = [
-  { id: '1', name: 'Alice', email: 'alice@example.com' },
-  { id: '2', name: 'Bob', email: 'bob@example.com' },
-  // More users...
-];
-
-let newUser = { id: '3', name: 'Charlie', email: 'charlie@example.com' };
-users = utils.createData(users, newUser);
-console.log(users); // The users array now includes Charlie.
-```
-
-## `updateData(array, id, data)`
-
-Update an object in an array based on its ID.
-
-```javascript
-const utils = require('@appsmith/js-utility-library');
-
-let users = [
-  { id: '1', name: 'Alice', email: 'alice@example.com' },
-  { id: '2', name: 'Bob', email: 'bob@example.com' },
-  // More users...
-];
-
-let updatedUser = { name: 'Charlie', email: 'charlie@example.com' };
-users = utils.updateData(users, '2', updatedUser);
-console.log(users); // The 'Bob' user is updated with the new data.
-```
-
-## `deleteData(array, id)`
-
-Delete an object from an array based on its ID.
-
-```javascript
-const utils = require('@appsmith/js-utility-library');
-
-let users = [
-  { id: '1', name: 'Alice', email: 'alice@example.com' },
-  { id: '2', name: 'Bob', email: 'bob@example.com' },
-  // More users...
-];
-
-users = utils.deleteData(users, '2'); // Deletes the 'Bob' user
-console.log(users); // The 'Bob' user is removed from the array.
-```
-
 ## `generateId(type, length = 10)`
 
 Generate a unique ID of the specified type ('random' or 'uuid').
