@@ -16,12 +16,6 @@ You can install Appsmith Utility Library using npm or yarn:
 npm install git@github.com:appsmithorg/js-utility-library.git
 ```
 
-or
-
-```bash
-yarn add git@github.com:appsmithorg/js-utility-library.git
-```
-
 ## Usage
 
 Here are the functions available in this module and how to use them:
