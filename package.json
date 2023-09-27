@@ -9,16 +9,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/appsmithorg/app-utils-library.git"
+    "url": "https://github.com/appsmithorg/js-utility-library.git"
   },
   "author": "Jacques Ikot",
   "license": "MIT",
   "dependencies": {},
   "keywords": [
     "utilities",
-    "functions"
+    "functions",
+    "javascript"
   ],
-  "homepage": "https://github.com/appsmithorg/app-utils-library#readme",
+  "homepage": "https://github.com/appsmithorg/js-utility-library#readme",
   "devDependencies": {
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^5.88.2",

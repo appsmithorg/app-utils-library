@@ -10,10 +10,16 @@ This is a collection of utility functions for common tasks in JavaScript. This m
 
 ## Installation
 
-You can install Appsmith Utility Library using npm or yarn:
+You can install Appsmith Utility Library using npm:
 
 ```bash
 npm install git@github.com:appsmithorg/js-utility-library.git
+```
+
+or JsDelivr
+
+```bash
+https://cdn.jsdelivr.net/gh/appsmithorg/js-utility-library/dist/index.min.js
 ```
 
 ## Usage
