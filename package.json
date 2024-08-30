@@ -22,7 +22,7 @@
   "homepage": "https://github.com/appsmithorg/js-utility-library#readme",
   "devDependencies": {
     "uglifyjs-webpack-plugin": "^2.2.0",
-    "webpack": "^5.88.2",
+    "webpack": "^5.94.0",
     "webpack-cli": "^5.1.4"
   }
 }
